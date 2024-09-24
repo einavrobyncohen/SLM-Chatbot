@@ -1,0 +1,11 @@
+venv/
+rasa-env/
+ml_model/model/
+ml_model/data/*.csv
+rasa_chatbot/models/
+rasa_chatbot/_pycache_/
+rasa_chatbot/actions/_pycache_/
+
+*.log
+*.temp
+.DS_store
