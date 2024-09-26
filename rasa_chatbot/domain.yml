@@ -12,36 +12,56 @@ intents:
 
 entities:
   - ticket_id
+  - priority
+  - ticket_type
 
 slots:
+  ticket_type: 
+    type: text
+    mappings:
+      - type: from_entity
+        entity: ticket_type
+
+  priority:
+    type: text
+    mappings: 
+      - type: from_entity 
+        entity: priority 
+
   ticket_id:
     type: text
     mappings:
       - type: from_entity
         entity: ticket_id
 
+actions:
+  - action_predict_ticket_approval
+
 responses:
   utter_ask_ticket_status:
-  - text: "Let me check the status of ticket {ticket_id}..."
+    - text: "Let me check the status of ticket {ticket_id}..."
+
+  utter_ask_ticket_info:
+    - text: "Please provide the ticket type and priority."
 
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hey! How are you?"
 
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
 
   utter_did_that_help:
-  - text: "Did that help you?"
+    - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+    - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+    - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+    - text: "I am a bot, powered by Rasa."
 
 session_config:
   session_expiration_time: 60

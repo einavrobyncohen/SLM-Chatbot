@@ -1,35 +1,37 @@
 version: "3.1"
 
 stories:
+  - story: check ticket status with ID
+    steps:
+      - intent: ask_ticket_status
+        entities:
+          - ticket_id
+      - action: utter_ask_ticket_status
 
-- story: check ticket status 
-  steps: 
-  - intent: ask_ticket_status
-  - action: utter_ask_ticket_status 
-  
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - story: ticket approval prediction with type and priority
+    steps:
+      - intent: ask_ticket_status
+        entities:
+          - ticket_type
+          - priority
+      - action: utter_ask_ticket_info
+      - slot_was_set:
+          - ticket_type: "Software"
+          - priority: "3"
+      - action: action_predict_ticket_approval
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - story: greet the bot
+    steps:
+      - intent: greet
+      - action: utter_greet
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - story: affirm and continue
+    steps:
+      - intent: affirm
+      - action: utter_happy
+
+  - story: deny and cheer up
+    steps:
+      - intent: deny
+      - action: utter_cheer_up
+      - action: utter_did_that_help
